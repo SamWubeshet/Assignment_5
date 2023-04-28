@@ -37,16 +37,16 @@ class MovieList extends Component {
             return (
                 <Carousel onSelect={this.handleSelect}>
                     {movieList.map((movie) =>
-                        // console.log(movie)
-                        <Carousel.Item key={movie.title}>
+
+                        <Carousel.Item key={movie._id}>
                             <div>
-                                <LinkContainer to={'/movie/'+movie.title} onClick={()=>this.handleClick(movie)}>
-                                    <Nav.Link><Image className="image" src={movie.imageUrl} thumbnail /></Nav.Link>
+                                <LinkContainer to={'/movie/'+movie._id} onClick={()=>this.handleClick(movie)}>
+                                    <Nav.Link><Image className="image" src={movie.ImageUrl} thumbnail /></Nav.Link>
                                 </LinkContainer>
                             </div>
                             <Carousel.Caption>
                                 <h3>{movie.title}</h3>
-                                <BsStarFill glyph={'star'} /> {movie.averaged_rating} &nbsp;&nbsp; {movie.year_released}
+                                <BsStarFill glyph={'star'} /> {movie.averageRating} &nbsp;&nbsp; {movie.year_released.slice(0, -1).split('T')[0]}
                             </Carousel.Caption>
                         </Carousel.Item>
                     )}

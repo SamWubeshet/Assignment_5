@@ -1,13 +1,13 @@
 import React, { Component} from 'react';
-import { submitRegister } from '../actions/authActions';
-import {fetchMovies, searchMovie, setMovie, setMovies} from "../actions/movieActions";
+//import { submitRegister } from '../actions/authActions';
+import {fetchMovies, setMovie} from "../actions/movieActions";
 import { connect } from 'react-redux';
-import {Form, Button, Carousel, Nav, Image} from 'react-bootstrap';
-import runtimeEnv from "@mars/heroku-js-runtime-env";
-import { Redirect } from 'react-router-dom'
-import {LinkContainer} from "react-router-bootstrap";
+import {Form, Button, Carousel, Image} from 'react-bootstrap';
+//import runtimeEnv from "@mars/heroku-js-runtime-env";
+//import { Redirect } from 'react-router-dom'
+//import {LinkContainer} from "react-router-bootstrap";
 import {BsStarFill} from "react-icons/bs";
-
+const env = process.env;
 class Search extends Component {
 
     constructor(props){
@@ -39,7 +39,7 @@ class Search extends Component {
     search() {
         const {dispatch} = this.props;
 
-        const env = runtimeEnv();
+       
         // return dispatch => {
         return fetch(`${env.REACT_APP_API_URL}/search/${this.state.search_details.search_term}`, {
             method: 'GET',
@@ -54,10 +54,10 @@ class Search extends Component {
                 throw Error(response.statusText);
             }
             return response.json()
-            console.log(response.json())
+            //console.log(response.json())
         }).then((res) => {
             // dispatch(moviesFetched(res.movie));
-            dispatch(setMovies(res.movie));
+            dispatch(setMovie(res.movie));
             console.log(res.movie);
             // this.setRedirect();
             this.state.search_details.movies = res.movie
@@ -125,11 +125,11 @@ class Search extends Component {
                             {this.state.search_details.movies.map((mov) =>
                                 <Carousel.Item key={mov.title}>
                                     <div>
-                                        <Image className="image" src={mov.imageUrl} thumbnail />
+                                        <Image className="image" src={mov.ImageUrl} thumbnail />
                                     </div>
                                     <Carousel.Caption>
                                         <h3>{mov.title}</h3>
-                                        <BsStarFill glyph={'star'} /> {mov.averaged_rating} &nbsp;&nbsp; {mov.year_released}
+                                        <BsStarFill glyph={'star'} /> {mov.averageRating} &nbsp;&nbsp; {mov.year_released}
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             )}

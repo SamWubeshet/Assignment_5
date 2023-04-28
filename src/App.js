@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/" render={()=><MovieList />}/>
             <Route exact path="/movielist" render={()=><MovieList />}/>
            
-            <Route exact path="/movie/:movie_title" render={()=><Movie />}/>
+            <Route exact path="/movie/:movieId" render={()=><Movie />}/>
             <Route exact path="/search" render={()=><Search />}/>
             <Route path="/signin" render={()=><Authentication />}/>
           </div>
